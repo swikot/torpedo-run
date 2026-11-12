@@ -21,4 +21,7 @@ const config = {
   scene: [BootScene, GameScene],
 };
 
-new Phaser.Game(config);
+const game = new Phaser.Game(config);
+
+// Expose for debugging in the browser console (dev builds only).
+if (import.meta.env.DEV) window.game = game;

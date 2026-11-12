@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
-import { GAME, COLORS, OCEAN } from '../config.js';
+import { GAME, COLORS, OCEAN, PLAYER } from '../config.js';
+import Player from '../entities/Player.js';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -8,9 +9,18 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     this.drawOcean();
+    this.setWorldBounds();
+    this.player = new Player(this, GAME.WIDTH / 2, GAME.HEIGHT / 2);
   }
 
-  // Draws a static pattern of small wave dashes so motion will be visible later.
+  // The boat's hit circle is smaller than the boat, so pull the edges in by
+  // the difference; otherwise the nose pokes off-screen at the border.
+  setWorldBounds() {
+    const pad = (PLAYER.WIDTH - PLAYER.HEIGHT) / 2;
+    this.physics.world.setBounds(pad, pad, GAME.WIDTH - pad * 2, GAME.HEIGHT - pad * 2);
+  }
+
+  // Draws a static pattern of small wave dashes so motion is easy to see.
   drawOcean() {
     const g = this.add.graphics();
     g.lineStyle(2, COLORS.WAVE, OCEAN.WAVE_ALPHA);
@@ -25,5 +35,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   // Called every frame. `delta` = milliseconds since the last frame.
-  update(time, delta) {}
+  update(time, delta) {
+    this.player.update(time, delta);
+  }
 }

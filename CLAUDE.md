@@ -96,7 +96,7 @@ public/
 
 ## Roadmap
 - [x] 1. Scaffold Phaser + Vite, empty GameScene with ocean background
-- [ ] 2. Player boat movement (thrust, rotation, momentum, screen bounds)
+- [x] 2. Player boat movement (thrust, rotation, momentum, screen bounds)
 - [ ] 3. Straight torpedoes spawning from edges
 - [ ] 4. Collision, HP, invincibility flash
 - [ ] 5. Score timer + HUD
